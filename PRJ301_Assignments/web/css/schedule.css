@@ -1,0 +1,57 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 8, 2023, 1:05:22 PM
+    Author     : anh40
+*/
+body {
+  padding: 6em;
+  font-family: trebuchet MS;
+  margin:20px;
+}
+
+h1 {
+  text-align: center;
+  color: #836953;
+}
+
+.myTimetable {
+  width:80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.myTimetable thead{ 
+  font-size: 15pt;
+  color: #836953;
+}
+
+.myTimetable tbody {
+  background-color: white;
+}
+
+.myTimetable td {
+  border: 1px solid black;
+  padding: 6px;
+  text-align: center;
+}
+.myTimetable tbody tr td:first-child {
+  background-color: #b4d3b2;
+  font-weight: bold;
+}
+
+.subject {
+  font-size: 12pt;
+  margin-bottom:4px;
+}
+
+.time {
+  font-size: 10pt;
+  font-style: italic;
+}
+.background_img{
+padding-top: 100px
+}

@@ -1,0 +1,66 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 8, 2023, 11:25:06 PM
+    Author     : anh40
+*/
+
+body {
+  padding: 6em;
+  font-family: trebuchet MS;
+  margin:20px;
+}
+
+h1 {
+  text-align: center;
+  color: #836953;
+}
+
+.myTimetable {
+  width:90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.myTimetable thead{ 
+  font-size: 15pt;
+  color: #434C5E;
+  background-color:#6B90DA ;
+}
+
+.myTimetable thead tr th{
+  border-right: 2px white solid;
+}
+
+.myTimetable tbody tr td{
+  border-right: 2px white solid;
+}
+
+.myTimetable tbody {
+  background-color: white;
+}
+
+.myTimetable td {
+  border-top: 1px solid black;
+  padding: 6px;
+  text-align: center;
+}
+.myTimetable tbody tr td:first-child {
+  font-weight: bold;
+  width: 50px;
+}
+
+.subject {
+  font-size: 12pt;
+  margin-bottom:4px;
+}
+
+.time {
+  font-size: 10pt;
+  font-style: italic;
+}
+.background_img{
+padding-top: 100px
+}
