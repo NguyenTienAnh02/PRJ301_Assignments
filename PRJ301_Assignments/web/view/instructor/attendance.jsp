@@ -195,17 +195,13 @@
                 <a href="../logout">Logout</a>
             </div>
         </nav> 
+        <h1 style="text-align: center">Take Attendance</h1><br/>
 
-        <h1 style="text-align: center">Take Attendance</h1>
-        <h1 style="text-align: center">
-        </h1><br/>
-
--${requestScope.ses.instructor.id}
+--------------------${requestScope.ses.instructor.id}
         <form action="attendance" method="POST">
             <table>
                 <tr class="table-head">
                     <td>No</td>
-<!--                    <td>Date</td>-->
                     <td>Room</td>
                     <td>Student</td>
                     <td>Group Name</td>
@@ -231,7 +227,6 @@
                         <td>
                              <div>${requestScope.ses.group.name}</div>
                         </td>
-
                         <td>
                              <div>${requestScope.ses.group.subject.name}</div>
                         </td>
@@ -256,7 +251,6 @@
                                     placeholder="Write your comment..." type="text" value="${a.description}" name="description${a.student.id}"/>
                             </div>  
                         </td>
-                       
                         <td>${a.datetime}</td>
                     </tr>   
                 </c:forEach>
