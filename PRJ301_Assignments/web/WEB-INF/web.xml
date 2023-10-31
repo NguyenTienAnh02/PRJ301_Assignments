@@ -16,6 +16,14 @@
         <servlet-name>LecturerSchedule</servlet-name>
         <servlet-class>controller.LecturerSchedule</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AttendanceTakingController</servlet-name>
+        <servlet-class>controller.instructor.AttendanceTakingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeTableController</servlet-name>
+        <servlet-class>controller.instructor.TimeTableController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/schedule</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>LecturerSchedule</servlet-name>
         <url-pattern>/lecturerschedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceTakingController</servlet-name>
+        <url-pattern>/instructor/attendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeTableController</servlet-name>
+        <url-pattern>/instructor/timetable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
