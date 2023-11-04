@@ -104,7 +104,6 @@
                         <p>Incorrect username or password. Please try again.</p>
                     </div>
                 </c:if>
-
                 <button type="submit">Login</button>
             </form>
         </div>

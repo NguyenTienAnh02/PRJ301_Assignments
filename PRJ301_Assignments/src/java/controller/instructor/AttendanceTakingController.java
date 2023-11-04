@@ -22,8 +22,6 @@ import model.assingment.Session;
  * @author sonnt
  */
 public class AttendanceTakingController extends HttpServlet {
-   
-  
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -73,7 +71,8 @@ public class AttendanceTakingController extends HttpServlet {
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
-        response.sendRedirect("../view/instructor/timetable.jsp");
+        response.getWriter().print("done");
+//        response.sendRedirect("../view/instructor/timetable?id=");
     }
 
     /** 

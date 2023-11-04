@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
-            response.sendRedirect("view/instructor/timetable.jsp");
+            response.sendRedirect("../PRJ301_Assignments/instructor/timetable?id=1");
         } else {
             boolean loginFailed = true;
             request.setAttribute("loginFailed", loginFailed);

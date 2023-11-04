@@ -176,7 +176,7 @@
     <body>
         <button class="scroll-to-left-btn" onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
         <nav class="navbar">
-            <a href="/AttendanceCheckingSystem" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="/PRJ301_Assignments/instructor/timetable?id=1" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
             <div class="navbar-links">
                 <a href="../logout">Logout</a>
             </div>

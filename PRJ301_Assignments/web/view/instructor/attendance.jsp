@@ -58,7 +58,6 @@
                 margin: 4px 2px;
                 cursor: pointer;
                 border-radius: 4px;
-                /*transition: background-color 0.3s ease-in-out;*/
                 position: relative;
                 overflow: hidden;
             }
@@ -125,8 +124,7 @@
             }
             /* Scroll to top button */
             .scroll-to-top-btn {
-                /* display: none; */
-                /* Hide button by default */
+
                 position: fixed;
                 bottom: 20px;
                 right: 30px;
@@ -166,7 +164,7 @@
 
             // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function () {
-                scrollFunction()
+                scrollFunction();
             };
 
             function scrollFunction() {
@@ -190,7 +188,7 @@
 
         <nav class="navbar">
 
-            <a href="/AttendanceCheckingSystem" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="/PRJ301_Assignments/instructor/timetable?id=1" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
             <div class="navbar-links">
                 <a href="../logout">Logout</a>
             </div>
@@ -204,6 +202,7 @@
                     <td>No</td>
                     <td>Room</td>
                     <td>Student</td>
+                    <td>Image</td>
                     <td>Group Name</td>
                     <td>Course</td>
                     <td>Status</td>
@@ -224,6 +223,7 @@
                                 <input type="hidden" name="stuid" value="${a.student.id}"/>   
                             </div>
                         </td>
+                        <td><<img src="src" alt="alt"/></td>
                         <td>
                              <div>${requestScope.ses.group.name}</div>
                         </td>
