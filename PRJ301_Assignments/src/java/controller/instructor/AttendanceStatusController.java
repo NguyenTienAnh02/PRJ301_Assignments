@@ -5,23 +5,35 @@
 
 package controller.instructor;
 
-import dal.assignment.AttendenceDBContext;
 import dal.assignment.SessionDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.assingment.Student;
-import model.assingment.Attendance;
+import java.util.HashMap;
+import java.util.List;
 import model.assingment.Session;
+import model.assingment.Student;
+import model.assingment.StudentStatus;
 
 /**
  *
- * @author sonnt
+ * @author anh40
  */
-public class AttendanceTakingController extends HttpServlet {
+public class AttendanceStatusController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -34,16 +46,13 @@ public class AttendanceTakingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SessionDBContext db = new SessionDBContext();
-        int id = Integer.parseInt(request.getParameter("id"));
-        Session ses = db.getSessionsAtt(id);
-        request.setAttribute("ses",ses);
-        
-        AttendenceDBContext attDb = new AttendenceDBContext();
-        ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
-        
-        request.setAttribute("atts", atts);
-        request.getRequestDispatcher("../view/instructor/attendance.jsp").forward(request, response);
+        int groupid = 1;
+        SessionDBContext sessionDBContext = new SessionDBContext();
+        List<Session> sessions =  sessionDBContext.getSessionsByGroupID(groupid);
+        HashMap<Student,List<StudentStatus>> hashmap = sessionDBContext.getStudentStatusByGroupID(groupid);
+        request.setAttribute("sessions", sessions);
+        request.setAttribute("map", hashmap);
+        request.getRequestDispatcher("../view/instructor/attreport.jsp").forward(request, response);
     } 
 
     /** 
@@ -56,23 +65,7 @@ public class AttendanceTakingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Session ses = new Session();
-        ses.setId(Integer.parseInt(request.getParameter("sesid")));
-        String[] stuids = request.getParameterValues("stuid");
-        for (String stuid : stuids) {
-            Attendance a = new Attendance();
-            a.setSession(ses);
-            Student s = new Student();
-            s.setId(Integer.parseInt(stuid));
-            a.setStudent(s);
-            a.setStatus(request.getParameter("status"+stuid).equals("present"));
-            a.setDescription(request.getParameter("description"+stuid));
-            ses.getAtts().add(a);
-        }
-        SessionDBContext sesDB = new SessionDBContext();
-        sesDB.addAttendences(ses);
-        response.getWriter().print("done");
-        response.sendRedirect("../index.html");
+        processRequest(request, response);
     }
 
     /** 

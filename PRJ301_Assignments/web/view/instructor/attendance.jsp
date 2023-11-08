@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-                <link rel="icon" href="https://play-lh.googleusercontent.com/BFYTO8vhN2ZveSWA7XGoQVwei9cCvpi2je5eyDI2a1WoKxTjJJw5Sv8ULoQEGqAYo0g" type="image/x-icon">
+        <link rel="icon" href="https://play-lh.googleusercontent.com/BFYTO8vhN2ZveSWA7XGoQVwei9cCvpi2je5eyDI2a1WoKxTjJJw5Sv8ULoQEGqAYo0g" type="image/x-icon">
         <title>Lecturer Timetable</title>
         <style>
             * {
@@ -84,9 +84,7 @@
                 background-color: #FFA500;
                 margin: 1px 0;
             }
-
             /*NAVBAR*/
-
             .navbar {
                 background-color: #f05123;
                 color: #fff;
@@ -124,7 +122,6 @@
             }
             /* Scroll to top button */
             .scroll-to-top-btn {
-
                 position: fixed;
                 bottom: 20px;
                 right: 30px;
@@ -188,14 +185,13 @@
 
         <nav class="navbar">
 
-            <a href="/PRJ301_Assignments/instructor/timetable?id=1" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="/PRJ301_Assignments/" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
             <div class="navbar-links">
                 <a href="../logout">Logout</a>
             </div>
         </nav> 
         <h1 style="text-align: center">Take Attendance</h1><br/>
 
---------------------${requestScope.ses.instructor.id}
         <form action="attendance" method="POST">
             <table>
                 <tr class="table-head">
@@ -218,12 +214,12 @@
                             <div>${requestScope.ses.room.id}</div>
                         </td>
                         <td>
-                            <div>
+                            <div style="width: 200px">
                                 ${a.student.name}
                                 <input type="hidden" name="stuid" value="${a.student.id}"/>   
                             </div>
                         </td>
-                        <td><<img src="src" alt="alt"/></td>
+                        <td style="text-align: center"><img src="src" alt="alt"/></td>
                         <td>
                              <div>${requestScope.ses.group.name}</div>
                         </td>
@@ -232,7 +228,7 @@
                         </td>
                         <td>
                             <div style="display: flex; justify-content: center">
-                                <input type="radio"
+                                <input type="radio" 
                                    <c:if test="${!a.status}">
                                        checked="checked"
                                    </c:if>
@@ -251,7 +247,7 @@
                                     placeholder="Write your comment..." type="text" value="${a.description}" name="description${a.student.id}"/>
                             </div>  
                         </td>
-                        <td>${a.datetime}</td>
+                        <td style="text-align: center">${a.datetime}</td>
                     </tr>   
                 </c:forEach>
             </table>

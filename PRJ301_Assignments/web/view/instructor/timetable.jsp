@@ -11,8 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" href="" type="image/x-icon">
-
+        <link rel="icon" href="https://play-lh.googleusercontent.com/BFYTO8vhN2ZveSWA7XGoQVwei9cCvpi2je5eyDI2a1WoKxTjJJw5Sv8ULoQEGqAYo0g" type="image/x-icon">
         <title>JSP Page</title>
         <style>
             * {
@@ -24,7 +23,10 @@
                 border-collapse: collapse;
                 width: 600px;
                 height: 100px;
-/*                background-color: black;*/
+            }
+            
+            table{
+                margin-top: -20px;
             }
 
             .groupname{
@@ -75,12 +77,6 @@
                 transform: scaleX(1.02);
             }
 
-            .take-attend{
-                text-decoration: none;
-                background-color: #FFA500;
-                margin: 1px 0;
-            }
-
             .navbar {
                 background-color: #f05123;
                 color: #fff;
@@ -112,8 +108,8 @@
             }
 
             .navbar-links a:hover {
-                color: #eee;
-                text-shadow: 1px 1px 1px #eee;
+                color: gray;
+                text-shadow:#eee;
             }
             /* Scroll to top button */
             .scroll-to-left-btn {
@@ -167,22 +163,22 @@
             }
 
             // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
+            function leftFunction() {
                 document.body.scrollLeft = 0;
                 document.documentElement.scrollLeft = 0;
             }
         </script> 
     </head>
     <body>
-        <button class="scroll-to-left-btn" onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+        <button class="scroll-to-left-btn" onclick="leftFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
         <nav class="navbar">
-            <a href="/PRJ301_Assignments/instructor/timetable?id=1" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="/PRJ301_Assignments/" class="navbar-logo"><i class="fa-solid fa-house-chimney"></i></a>
             <div class="navbar-links">
                 <a href="../logout">Logout</a>
             </div>
         </nav> 
 
-        <h1 style="text-align: center">Weekly Timetable</h1>
+        <h1 style="text-align: center ;margin-top: 5px">Weekly Timetable</h1>
         <h1 style="text-align: center"></h1><br/>
 
         <table>
@@ -219,10 +215,10 @@
                                     </a>
                                     
                                     <c:if test="${k.isAtt}">
-                                        <div style="color: green">(attended)</div>
+                                        <div style="color: green">(Takend)</div>
                                     </c:if>
                                     <c:if test="${!k.isAtt}">
-                                        <div style="color: red">(not yet)</div>
+                                        <div style="color: red">(Not yet)</div>
                                     </c:if>  
                                     <div class="groupname">${k.group.name}</div>
                                     <div class="slottime" style="text-align: center">${s.description}</div>

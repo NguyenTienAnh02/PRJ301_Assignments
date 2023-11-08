@@ -10,12 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.assingment.Attendance;
 import model.assingment.Group;
 import model.assingment.Room;
 import model.assingment.Session;
+import model.assingment.Student;
+import model.assingment.StudentStatus;
 import model.assingment.Subject;
 import model.assingment.TimeSlot;
 
@@ -31,9 +35,9 @@ public class SessionDBContext extends DBContext<Session> {
             String sql = "SELECT  \n"
                     + "	ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description]\n"
                     + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
-                    + "							INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
-                    + "							INNER JOIN Room r ON r.roomid = ses.rid\n"
-                    + "							INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "			INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
+                    + "			INNER JOIN Room r ON r.roomid = ses.rid\n"
+                    + "			INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
                     + "WHERE ses.iid = ? AND ses.[date] >= ? AND ses.[date] <= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, iid);
@@ -74,14 +78,14 @@ public class SessionDBContext extends DBContext<Session> {
         return sessions;
     }
 
-    public Session getSessions(int sesid) {
+    public Session getSessionsAtt(int sesid) {
         try {
             String sql = "SELECT  \n"
                     + "	ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description]\n"
                     + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
-                    + "							INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
-                    + "							INNER JOIN Room r ON r.roomid = ses.rid\n"
-                    + "							INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "				INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
+                    + "				INNER JOIN Room r ON r.roomid = ses.rid\n"
+                    + "				INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
                     + "WHERE ses.sesid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sesid);
@@ -195,6 +199,84 @@ public class SessionDBContext extends DBContext<Session> {
     @Override
     public ArrayList<Session> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<Session> getSessionsByGroupID(int id) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql = "SELECT  \n"
+                    + "	ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description]\n"
+                    + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
+                    + "			INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
+                    + "			INNER JOIN Room r ON r.roomid = ses.rid\n"
+                    + "			INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "WHERE ses.gid = ? order by ses.[date]";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                session.setId(rs.getInt("sesid"));
+                session.setDate(rs.getDate("date"));
+                session.setIndex(rs.getInt("index"));
+                session.setIsAtt(rs.getBoolean("isAtt"));
+                Room r = new Room();
+                r.setId(rs.getString("roomid"));
+                session.setRoom(r);
+
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                session.setGroup(g);
+
+                Subject sub = new Subject();
+                sub.setId(rs.getInt("subid"));
+                sub.setName(rs.getString("subname"));
+                g.setSubject(sub);
+
+                TimeSlot time = new TimeSlot();
+                time.setId(rs.getInt("tid"));
+                time.setDescription(rs.getString("description"));
+                session.setSlot(time);
+
+                sessions.add(session);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+    }
+
+    public HashMap<Student,List<StudentStatus>> getStudentStatusByGroupID(int id) {
+        HashMap<Student,List<StudentStatus>> hashmap = new HashMap<>();
+        try {
+            String sql = "Select * from Student stu left join Group_Student gru on stu.stuid = gru.stuid left join Attendance [at] on [at].stuid = stu.stuid where gru.gid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getInt(1));
+                student.setName(rs.getString(2));
+                student.setMssv(rs.getString(3));
+                StudentStatus studentStatus = new StudentStatus();
+                studentStatus.setSesid(rs.getInt(6));
+                studentStatus.setStatus(rs.getBoolean("status"));
+                if(hashmap.containsKey(student)){
+                    List<StudentStatus> studentStatuss = hashmap.get(student);
+                    studentStatuss.add(studentStatus);
+                    hashmap.put(student, studentStatuss);
+                }
+                else {
+                    List<StudentStatus> studentStatuss = new ArrayList<>();
+                    hashmap.put(student, studentStatuss);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashmap;
     }
 
 }

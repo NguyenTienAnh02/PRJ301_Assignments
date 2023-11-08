@@ -13,6 +13,15 @@ import java.util.ArrayList;
 public class Student implements IBaseModel{
     private int id;
     private String name;
+    private String mssv;
+
+    public String getMssv() {
+        return mssv;
+    }
+
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
+    }
     private ArrayList<Group> groups = new ArrayList<>();
 
     public int getId() {
@@ -38,5 +47,28 @@ public class Student implements IBaseModel{
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        return this.id == other.id;
+    }
+    
     
 }

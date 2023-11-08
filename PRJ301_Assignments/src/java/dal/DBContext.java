@@ -21,9 +21,10 @@ public abstract class DBContext<T extends IBaseModel> {
     public DBContext()
     {
         try {
-            String url = "jdbc:sqlserver://localhost\\NGUYENTIENANH\\SQLEXPRESS:1433;databaseName=FALL2023_Assignment";
             String user = "sa";
-            String pass = "1234";
+            String pass = "1234";            
+            String url = "jdbc:sqlserver://localhost\\NGUYENTIENANH\\SQLEXPRESS:1433;databaseName=FALL2023_Assignment";
+
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException ex) {

@@ -32,6 +32,10 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.authentication.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AttendanceStatusController</servlet-name>
+        <servlet-class>controller.instructor.AttendanceStatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/schedule</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceStatusController</servlet-name>
+        <url-pattern>/instructor/status</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
